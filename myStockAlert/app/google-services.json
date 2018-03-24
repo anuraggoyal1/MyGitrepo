@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "871685737693",
+    "firebase_url": "https://mystockalert-f823c.firebaseio.com",
+    "project_id": "mystockalert-f823c",
+    "storage_bucket": "mystockalert-f823c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:871685737693:android:e8730393d7470cf0",
+        "android_client_info": {
+          "package_name": "com.invest.stock.mystockalert"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "871685737693-2mnhj261n7e3ft9bs7ve470bhcl6p4g3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.invest.stock.mystockalert",
+            "certificate_hash": "05768ce0493cfdad260dae898bdbb954e568bef7"
+          }
+        },
+        {
+          "client_id": "871685737693-4aun5k9mvl408ds86fh8khep64dpepul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXRZ2_eDHK27svxx5TUMZcbP-ILP5AiJI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "871685737693-4aun5k9mvl408ds86fh8khep64dpepul.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
