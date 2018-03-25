@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,9 +18,21 @@ import com.opencsv.CSVReader;
 public class StocksBelowXDaysEMA {
 	static String path = "/Users/anuraggoyal/Documents/daily_tracker/bulk/";
 	static Map<String, StockOHLCData> pday, tday;
+	static List<String> breakDown13EMA,breakDown50EMA,breakDown100EMA,breakDown200EMA;
 
+	static List<String> breakOut13EMA,breakOut50EMA,breakOut100EMA,breakOut200EMA;
+	
 	public static void main(String[] args) {
 		System.out.println("starting check...");
+		breakDown13EMA = new LinkedList<String>();
+		breakDown50EMA = new LinkedList<String>();
+		breakDown100EMA = new LinkedList<String>();
+		breakDown200EMA = new LinkedList<String>();
+		breakOut13EMA = new LinkedList<String>();
+		breakOut50EMA = new LinkedList<String>();
+		breakOut100EMA = new LinkedList<String>();
+		breakOut200EMA = new LinkedList<String>();
+		
 		int c = 0;
 		pday = loadPreviousDayData();
 		tday = loadTodayData();
@@ -27,6 +40,7 @@ public class StocksBelowXDaysEMA {
 		Symbols sym = new Symbols();
 		List<String> symbols = sym.getSymbols();
 		System.out.println("Total Symbols-"+symbols.size());
+		
 		System.out.println("Stocks 5-EMA is below 13-EMA");
 		for (String s : symbols) {
 			if (tday.get(s).getEma5d() < tday.get(s).getEma13d()) {
@@ -39,29 +53,74 @@ public class StocksBelowXDaysEMA {
 		
 		//---
 		System.out.println();
-		System.out.println("Stocks Uptrend today...");
-		c=0;
+		System.out.println("Stocks Uptrend........................");
+		
+		System.out.println("Stocks Uptrend breakout 13EMA today...");
 		for (String s : symbols) {
 			if ((pday.get(s).getEma5d() < pday.get(s).getEma13d()) && (tday.get(s).getEma5d() > tday.get(s).getEma13d())) {
 				System.out.println(s);
-				c++;
 			}
-
 		}
-		System.out.println("total - " + c);
+		
+		System.out.println();
+		System.out.println("Stocks Uptrend breakout 50EMA today...");
+		for (String s : symbols) {
+			if ((pday.get(s).getEma5d() < pday.get(s).getEma50d()) && (tday.get(s).getEma5d() > tday.get(s).getEma50d())) {
+				System.out.println(s);
+			}
+		}
+		
+		System.out.println();
+		System.out.println("Stocks Uptrend breakout 100EMA today...");
+		for (String s : symbols) {
+			if ((pday.get(s).getEma5d() < pday.get(s).getEma100d()) && (tday.get(s).getEma5d() > tday.get(s).getEma100d())) {
+				System.out.println(s);
+			}
+		}
+		
+		System.out.println();
+		System.out.println("Stocks Uptrend breakout 200EMA today...");
+		for (String s : symbols) {
+			if ((pday.get(s).getEma5d() < pday.get(s).getEma200d()) && (tday.get(s).getEma5d() > tday.get(s).getEma200d())) {
+				System.out.println(s);
+			}
+		}
+		
 		
 		//---
 		System.out.println();
-		System.out.println("Stocks Downtrend today...");
-		c=0;
+		System.out.println();
+		System.out.println("Stocks Downtrend today.................");
+		System.out.println("Stocks Downtrend breakdown 13EMA today...");
 		for (String s : symbols) {
 			if ((pday.get(s).getEma5d() > pday.get(s).getEma13d()) && (tday.get(s).getEma5d() < tday.get(s).getEma13d())) {
 				System.out.println(s);
-				c++;
 			}
-
+		}	
+		
+		System.out.println();
+		System.out.println("Stocks Downtrend breakdown 50EMA today...");
+		for (String s : symbols) {
+			if ((pday.get(s).getEma5d() > pday.get(s).getEma50d()) && (tday.get(s).getEma5d() < tday.get(s).getEma50d())) {
+				System.out.println(s);
+			}
 		}
-		System.out.println("total - " + c);		
+		
+		System.out.println();
+		System.out.println("Stocks Downtrend breakdown 100EMA today...");
+		for (String s : symbols) {
+			if ((pday.get(s).getEma5d() > pday.get(s).getEma100d()) && (tday.get(s).getEma5d() < tday.get(s).getEma100d())) {
+				System.out.println(s);
+			}
+		}	
+		
+		System.out.println();
+		System.out.println("Stocks Downtrend breakdown 200EMA today...");
+		for (String s : symbols) {
+			if ((pday.get(s).getEma5d() > pday.get(s).getEma200d()) && (tday.get(s).getEma5d() < tday.get(s).getEma200d())) {
+				System.out.println(s);
+			}
+		}	
 
 	}
 

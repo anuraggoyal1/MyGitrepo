@@ -25,7 +25,7 @@ import java.util.StringTokenizer;
     
     String temp = "AMBUJACEM,ASIANPAINT,AUROPHARMA,AXISBANK,BAJFINANCE,BHARTIARTL";
     
-    String t = "AMBUJACEM";
+    String t = "BHARTIARTL";
     
     //BAJAJ-AUTO
     public List<String> getSymbols(){

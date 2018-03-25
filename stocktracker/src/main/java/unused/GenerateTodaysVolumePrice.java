@@ -158,7 +158,7 @@ public class GenerateTodaysVolumePrice {
 		if (N == 10)
 			EMAyesterday = pday.get(sym).getEma10d();
 		if (N == 15)
-			EMAyesterday = pday.get(sym).getEma15d();
+			EMAyesterday = pday.get(sym).getEma13d();
 
 		float EMAtoday = (pToday.floatValue() * K) + (EMAyesterday * (1 - K));
 

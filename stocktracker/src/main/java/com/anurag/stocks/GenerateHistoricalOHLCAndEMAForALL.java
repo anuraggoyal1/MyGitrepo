@@ -27,7 +27,7 @@ public class GenerateHistoricalOHLCAndEMAForALL {
 	static String header = "symbol,date,open,high,low,close,ema3d,ema5d,ema10d,ema13d,ema30d,ema50d,ema100d,ema150d,ema200d"
 			+ "\n";
 
-	static String path = "/Users/anuraggoyal/Documents/daily_tracker/bulk/";
+	static String path = "/Users/anuraggoyal/Documents/daily_tracker/bulk/daily/";
 
 	static float ema3 = 0.0f, ema5 = 0.0f, ema10 = 0.0f, ema13 = 0.0f, ema30 = 0.0f, ema50 = 0.0f, ema100 = 0.0f,
 			ema150 = 0.0f, ema200 = 0.0f;
@@ -63,7 +63,7 @@ public class GenerateHistoricalOHLCAndEMAForALL {
 							.append(symbolOnDate.get(s + ".NS" + "_" + d).getEma150d()).append(",")
 							.append(symbolOnDate.get(s + ".NS" + "_" + d).getEma200d()).append("\n");
 				else {
-					// case when a stock ddoes not have 1 year data (IPO)
+					// case when a stock does not have 1 year data (IPO)
 					csvData.append(s).append(",").append("").append(",")
 
 							.append("").append(",").append("").append(",").append("").append(",").append("").append(",")
