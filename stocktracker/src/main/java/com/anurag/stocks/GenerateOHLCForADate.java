@@ -21,15 +21,15 @@ import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
 
-public class GenerateHistoricalOHLCAndEMAForALL {
+public class GenerateOHLCForADate {
 	static int j = 0;
 
-	static String header = "symbol,date,open,high,low,close,ema3d,ema5d,ema10d,ema13d,ema30d,ema50d,ema100d,ema150d,ema200d"
+	static String header = "symbol,date,open,high,low,close,ema3d,ema5d,ema10d,ema20d,ema30d,ema50d,ema100d,ema150d,ema200d"
 			+ "\n";
 
 	static String path = "/Users/anuraggoyal/Documents/daily_tracker/bulk/daily/";
 
-	static float ema3 = 0.0f, ema5 = 0.0f, ema10 = 0.0f, ema13 = 0.0f, ema30 = 0.0f, ema50 = 0.0f, ema100 = 0.0f,
+	static float ema3 = 0.0f, ema5 = 0.0f, ema10 = 0.0f, ema20 = 0.0f, ema30 = 0.0f, ema50 = 0.0f, ema100 = 0.0f,
 			ema150 = 0.0f, ema200 = 0.0f;
 
 	static float O = 0.0f, H = 0.0f, L = 0.0f, C = 0.0f;
@@ -56,7 +56,7 @@ public class GenerateHistoricalOHLCAndEMAForALL {
 							.append(symbolOnDate.get(s + ".NS" + "_" + d).getEma3d()).append(",")
 							.append(symbolOnDate.get(s + ".NS" + "_" + d).getEma5d()).append(",")
 							.append(symbolOnDate.get(s + ".NS" + "_" + d).getEma10d()).append(",")
-							.append(symbolOnDate.get(s + ".NS" + "_" + d).getEma13d()).append(",")
+							.append(symbolOnDate.get(s + ".NS" + "_" + d).getEma20d()).append(",")
 							.append(symbolOnDate.get(s + ".NS" + "_" + d).getEma30d()).append(",")
 							.append(symbolOnDate.get(s + ".NS" + "_" + d).getEma50d()).append(",")
 							.append(symbolOnDate.get(s + ".NS" + "_" + d).getEma100d()).append(",")
@@ -87,8 +87,10 @@ public class GenerateHistoricalOHLCAndEMAForALL {
 		try {
 
 			Calendar from = Calendar.getInstance();
+			from.set(2018, 0, 1);
 			Calendar to = Calendar.getInstance();
-			from.add(Calendar.YEAR, -2); // from 1 year ago
+			to.set(2018, 0, 1);
+			//from.add(Calendar.YEAR, -2); // from 1 year ago
 
 			Symbols sym = new Symbols();
 			List<String> symbols = sym.getSymbols();
@@ -96,7 +98,11 @@ public class GenerateHistoricalOHLCAndEMAForALL {
 			for (String s : symbols) {
 
 				System.out.println(s + ".NS");
-				Stock hstock = YahooFinance.get(s + ".NS");
+				Stock hstock = YahooFinance.get(s + ".NS", from, to, Interval.DAILY);
+				
+				System.out.println(hstock.getQuote().getVolume());
+				
+				//hstock.getQuote().getAvgVolume();
 				List<HistoricalQuote> histQuotes = hstock.getHistory(from, to, Interval.DAILY);
 
 				for (HistoricalQuote stock : histQuotes) {
@@ -109,7 +115,7 @@ public class GenerateHistoricalOHLCAndEMAForALL {
 						ema3 = stock.getClose().floatValue();
 						ema5 = stock.getClose().floatValue();
 						ema10 = stock.getClose().floatValue();
-						ema13 = stock.getClose().floatValue();
+						ema20 = stock.getClose().floatValue();
 						ema30 = stock.getClose().floatValue();
 						ema50 = stock.getClose().floatValue();
 						ema100 = stock.getClose().floatValue();
@@ -127,7 +133,7 @@ public class GenerateHistoricalOHLCAndEMAForALL {
 							ema3 = calculateHistoricalEMA(stock.getSymbol(), 3, stock.getClose());
 							ema5 = calculateHistoricalEMA(stock.getSymbol(), 5, stock.getClose());
 							ema10 = calculateHistoricalEMA(stock.getSymbol(), 10, stock.getClose());
-							ema13 = calculateHistoricalEMA(stock.getSymbol(), 13, stock.getClose());
+							ema20 = calculateHistoricalEMA(stock.getSymbol(), 20, stock.getClose());
 							ema30 = calculateHistoricalEMA(stock.getSymbol(), 30, stock.getClose());
 							ema50 = calculateHistoricalEMA(stock.getSymbol(), 50, stock.getClose());
 							ema100 = calculateHistoricalEMA(stock.getSymbol(), 100, stock.getClose());
@@ -139,7 +145,7 @@ public class GenerateHistoricalOHLCAndEMAForALL {
 					}
 
 					String date = getDateFromCalender(stock.getDate());
-					StockOHLCData sd = new StockOHLCData(stock.getSymbol(), date, O, H, L, C, ema3, ema5, ema10, ema13,
+					StockOHLCData sd = new StockOHLCData(stock.getSymbol(), date, O, H, L, C, ema3, ema5, ema10, ema20,
 							ema30, ema50, ema100, ema150, ema200);
 
 					dates.add(date);
@@ -174,8 +180,8 @@ public class GenerateHistoricalOHLCAndEMAForALL {
 			EMAyesterday = ema5;
 		if (N == 10)
 			EMAyesterday = ema10;
-		if (N == 13)
-			EMAyesterday = ema13;
+		if (N == 20)
+			EMAyesterday = ema20;
 		if (N == 30)
 			EMAyesterday = ema30;
 		if (N == 50)
@@ -196,9 +202,11 @@ public class GenerateHistoricalOHLCAndEMAForALL {
 	}
 
 	public static void saveToFile(String date, StringBuilder csvData) throws IOException {
-		if (!(new File(path + "volume_price_" + date + ".csv").exists())) {
-			new File(path + "volume_price_" + date + ".csv").createNewFile();
+		if ((new File(path + "volume_price_" + date + ".csv").exists())) {
+			new File(path + "volume_price_" + date + ".csv").delete();
 		}
+		
+		new File(path + "volume_price_" + date + ".csv").createNewFile();
 
 		Files.write(Paths.get(path + "volume_price_" + date + ".csv"), csvData.toString().getBytes(),
 				StandardOpenOption.WRITE);

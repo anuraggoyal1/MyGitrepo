@@ -111,8 +111,8 @@ public class DailyTrendScreener {
 			if (day2.get(sym).getClose() < day2.get(sym).getEma50d())
 				count++;
 
-			if (day1.get(sym).getClose() > day1.get(sym).getEma13d() &&  count == 4)
-				return true;
+			/*if (day1.get(sym).getClose() > day1.get(sym).getEma13d() &&  count == 4)
+				return true;*/
 		}
 		return false;
 

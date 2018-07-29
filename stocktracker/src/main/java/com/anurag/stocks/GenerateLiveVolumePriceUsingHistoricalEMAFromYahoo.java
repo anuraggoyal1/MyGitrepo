@@ -25,7 +25,7 @@ import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 
 //This uses previous date file and calculate current EMA doing calculation...
-public class GenerateLiveVolumePriceUsingHistoricalEMA {
+public class GenerateLiveVolumePriceUsingHistoricalEMAFromYahoo {
 
 	static String header = "symbol,open,high,low,close,ema3d,ema5d,ema10d,ema15d,ema30d,ema50d,ema100d,ema150d,ema200d"
 			+ "\n";
@@ -159,8 +159,8 @@ public class GenerateLiveVolumePriceUsingHistoricalEMA {
 			EMAyesterday = pday.get(sym).getEma5d();
 		if (N == 10)
 			EMAyesterday = pday.get(sym).getEma10d();
-		if (N == 15)
-			EMAyesterday = pday.get(sym).getEma13d();
+		/*if (N == 15)
+			EMAyesterday = pday.get(sym).getEma13d();*/
 		if (N == 30)
 			EMAyesterday = pday.get(sym).getEma30d();
 		if (N == 50)

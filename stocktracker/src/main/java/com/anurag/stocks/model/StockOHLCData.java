@@ -11,7 +11,7 @@ public class StockOHLCData {
 	float ema3d;
 	float ema5d;
 	float ema10d;
-	float ema13d;
+	float ema20d;
 	float ema30d;
 	float ema50d;
 	float ema100d;
@@ -32,7 +32,7 @@ public class StockOHLCData {
 		this.ema3d = ema3d;
 		this.ema5d = ema5d;
 		this.ema10d = ema10d;
-		this.ema13d = ema13d;
+		this.ema20d = ema13d;
 		this.ema30d = ema30d;
 		this.ema50d = ema50d;
 		this.ema100d = ema100d;
@@ -80,8 +80,8 @@ public class StockOHLCData {
 		return ema10d;
 	}
 
-	public float getEma13d() {
-		return ema13d;
+	public float getEma20d() {
+		return ema20d;
 	}
 
 	public float getEma30d() {
