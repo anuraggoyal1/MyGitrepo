@@ -21,8 +21,8 @@ import com.opencsv.CSVReader;
 
 public class NSEDataInputProcessor {
 
-  static String inputPath = "/Users/anuraggoyal/Documents/daily_data/input-nse-full/";
-  static String outputPath = "/Users/anuraggoyal/Documents/daily_data/output-nse-full/";
+  static String inputPath = "/Users/a0g073t/Documents/daily_data/input-nse-full/";
+  static String outputPath = "/Users/a0g073t/Documents/daily_data/output-nse-full/";
 
 
   static String out_header =

@@ -129,13 +129,13 @@ public class VolumeCheckEvery15Min {
 	}
 
 	public static float getLastFifteenMinVolumeDifferenceFrom10DAverageInPercent(String symbol, Stock stock) {
-		if (stock.getQuote().getAvgVolume10D() != null) {
+		/*if (stock.getQuote().getAvgVolume10D() != null) {
 			long volumeAvgFor10DFifteenMinSoFar = stock.getQuote().getAvgVolume10D()
 					/ tradingWindowsCountOfFifteenMinutes;
 			float liveDifferenceFrom10DAvgVolInPercent = ((stock.getQuote().getVolume()
 					- oldQuote.get(symbol).getQuote().getVolume()) / volumeAvgFor10DFifteenMinSoFar) * 100;
 			return liveDifferenceFrom10DAvgVolInPercent;
-		}
+		}*/
 
 		return 0.0f;
 	}
